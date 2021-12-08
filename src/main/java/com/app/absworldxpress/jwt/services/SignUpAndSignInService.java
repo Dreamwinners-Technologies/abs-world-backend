@@ -109,7 +109,18 @@ public class SignUpAndSignInService {
         user.setFullName(signUpRequest.getFullName());
 
         String[] arrOfUsername = signUpRequest.getEmail().split("@", 2);
-        user.setUsername(arrOfUsername[0]);
+        String username = arrOfUsername[0];
+        Integer suffix = 0;
+
+        if (userRepository.existsByUsername(username)){
+            String name = username+"0"+suffix;
+            while(userRepository.existsByUsername(name)){
+                suffix++;
+                name = username+"0"+suffix;
+            }
+            username = name;
+        }
+        user.setUsername(username);
 
         user.setEmail(signUpRequest.getEmail());
         user.setPhoneNo(signUpRequest.getPhoneNo());
