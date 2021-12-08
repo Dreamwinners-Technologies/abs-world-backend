@@ -70,6 +70,7 @@ public class ProductServiceImpl implements ProductService{
                         .creationTime(basicTableInfo.getCreationTime())
                         .updatedBy(basicTableInfo.getCreateBy())
                         .updatedTime(basicTableInfo.getCreationTime())
+                        .productRating(0.0)
                         .build();
 
                 productRepository.save(productModel);

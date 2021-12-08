@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class ReviewModel {
     @Id
     private String reviewId;
-    private Integer rating;
+    private Double rating;
     private String reviewerName;
     private String comment;
 

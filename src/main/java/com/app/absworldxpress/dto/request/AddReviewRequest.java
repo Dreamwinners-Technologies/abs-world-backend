@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class AddReviewRequest {
-    private Integer rating;
+    private Double rating;
     private String comment;
 }

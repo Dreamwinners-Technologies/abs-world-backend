@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class ReviewServiceImpl implements ReviewService{
             ReviewModel reviewModel = ReviewModel.builder()
                     .reviewId(basicTableInfo.getId())
                     .reviewerName(userOptional.get().getFullName())
-                    .rating(addReviewRequest.getRating())
+                    .rating(Double.valueOf(new DecimalFormat("#.#").format(addReviewRequest.getRating())))
                     .comment(addReviewRequest.getComment())
                     .createdBy(basicTableInfo.getCreateBy())
                     .creationTime(basicTableInfo.getCreationTime())
@@ -55,7 +56,13 @@ public class ReviewServiceImpl implements ReviewService{
             reviewModelList.add(reviewModel);
 
             productModel.setReviewModelList(reviewModelList);
-//            productModel.setProductRating((productModel.getProductRating()+addReviewRequest.getRating())/2);
+
+            if (productModel.getProductRating()==0.0 || productModel.getProductRating()==null){
+                productModel.setProductRating(Double.valueOf(new DecimalFormat("#.#").format(addReviewRequest.getRating())));
+            }
+            else {
+                productModel.setProductRating(Double.valueOf(new DecimalFormat("#.#").format((productModel.getProductRating()+addReviewRequest.getRating())/2)));
+            }
 
             productRepository.save(productModel);
 
