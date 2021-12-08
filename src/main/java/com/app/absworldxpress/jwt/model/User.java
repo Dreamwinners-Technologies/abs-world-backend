@@ -76,6 +76,9 @@ public class User {
     private double IncomeBalance;
     private double shopBalance;
 
+    private String deliveryAddress;
+    private String profileImage;
+
     @OneToMany
     @JsonIgnore
     private List<User> myTeam;
