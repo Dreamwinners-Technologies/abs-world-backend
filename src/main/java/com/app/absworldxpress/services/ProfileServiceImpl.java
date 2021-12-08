@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,8 +62,13 @@ public class ProfileServiceImpl implements ProfileService {
         if (userOptional.isPresent()){
             User user = userOptional.get();
 
+            if (!user.getEmail().equalsIgnoreCase(editProfileRequest.getEmail())  && userRepository.existsByEmail(editProfileRequest.getEmail())){
+                return new ResponseEntity<>(new ApiMessageResponse(403,"Email Already Exist"), HttpStatus.BAD_REQUEST);
+            }
             user.setFullName(editProfileRequest.getFullName());
+
             user.setEmail(editProfileRequest.getEmail());
+
             user.setPhoneNo(editProfileRequest.getPhoneNo());
             user.setDeliveryAddress(editProfileRequest.getDeliveryAddress());
 

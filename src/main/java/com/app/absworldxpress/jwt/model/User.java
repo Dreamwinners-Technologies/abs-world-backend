@@ -37,11 +37,11 @@ public class User {
 
     @Column(unique = true)
     @NotBlank
+    @NaturalId
     @Size(min = 3, max = 100)
     private String username;
 
     @Column(unique = true)
-    @NaturalId
     @NotBlank
     @Size(max = 50)
     @Email
