@@ -156,7 +156,15 @@ public class SupportServiceImpl implements SupportService{
         Sort sort = Sort.by(orderBy,sortBy);
         pageable = PageRequest.of(pageNo, pageSize,sort);
 
-        Page<TicketModel> ticketModelPage = ticketRepository.findAll(Example.of(example),pageable);
+        Page<TicketModel> ticketModelPage;
+
+        if (authService.isThisUser("ADMIN", token)){
+            ticketModelPage = ticketRepository.findAll(Example.of(example),pageable);
+        }
+        else {
+            example.setCreatedBy(jwtProvider.getUserNameFromJwt(token));
+            ticketModelPage = ticketRepository.findAll(Example.of(example),pageable);
+        }
 
         TicketListResponse ticketListResponse = new TicketListResponse(ticketModelPage.getSize(), ticketModelPage.getNumber(), ticketModelPage.getTotalPages(),
                 ticketModelPage.isLast(), ticketModelPage.getTotalElements(), ticketModelPage.getTotalPages(), ticketModelPage.getContent());
