@@ -77,6 +77,9 @@ public class OrderServiceImpl implements OrderService{
                     .updatedTime(basicTableInfo.getCreationTime())
                     .build();
             System.out.println("before save order model");
+            if (orderModel.getProductModelList().isEmpty()){
+                return new ResponseEntity<>(new ApiResponse<OrderModel>(400,"Order Failed! Stock Unavailable.",null), HttpStatus.BAD_REQUEST);
+            }
             orderRepository.save(orderModel);
 
             return new ResponseEntity<>(new ApiResponse<OrderModel>(201,"Order Created!",orderModel), HttpStatus.CREATED);
@@ -131,7 +134,7 @@ public class OrderServiceImpl implements OrderService{
             if (optionalProductModel.isPresent()){
                 ProductModel productModel = optionalProductModel.get();
                 Integer stockAvailable = productModel.getStockAvailable();
-                if (stockAvailable>productRequest.getQuantity()){
+                if (stockAvailable>=productRequest.getQuantity()){
                         productModel.setStockAvailable(stockAvailable-productRequest.getQuantity());
                         orderAmount+= productModel.getCurrentPrice()*productRequest.getQuantity();
 
