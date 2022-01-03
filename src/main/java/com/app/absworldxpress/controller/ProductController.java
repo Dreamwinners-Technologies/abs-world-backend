@@ -20,11 +20,11 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/product/")
 public class ProductController {
+
     @Autowired
-    private final ProductService productService;
+    private ProductService productService;
 
     @GetMapping
     //all - by cat id - by name
