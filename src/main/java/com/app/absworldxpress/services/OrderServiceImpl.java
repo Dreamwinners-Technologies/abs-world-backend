@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService{
                 Integer stockAvailable = productModel.getStockAvailable();
                 if (stockAvailable>=productRequest.getQuantity()){
                         productModel.setStockAvailable(stockAvailable-productRequest.getQuantity());
-                        orderAmount+= productModel.getCurrentPrice()*productRequest.getQuantity();
+                        orderAmount+= (productModel.getRegularPrice()-productModel.getCashBack())*productRequest.getQuantity();
 
                         OrderProductModel orderProductModel = OrderProductModel.builder()
                                 .productId(productModel.getProductId())
