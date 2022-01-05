@@ -128,6 +128,7 @@ public class OrderServiceImpl implements OrderService{
 
     private List<OrderProductModel> manageOrderProductList(PlaceOrderRequest placeOrderRequest) {
         List<OrderProductModel> orderProductModelList = new ArrayList<OrderProductModel>();
+        orderAmount = 0;
         for (OrderProductModelRequest productRequest : placeOrderRequest.getProductList()){
 
             Optional<ProductModel> optionalProductModel = productRepository.findById(productRequest.getProductId());
