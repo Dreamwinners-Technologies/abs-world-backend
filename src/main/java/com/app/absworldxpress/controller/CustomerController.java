@@ -18,7 +18,7 @@ public class CustomerController {
     public ResponseEntity<ApiResponse<CustomerListResponse>> getUsersList(@RequestHeader(name = "Authorization") String token,
                                                                           @RequestParam(required = false) String customerName,
                                                                           String customerPhoneNo, String createdBy,
-                                                                          @RequestParam(defaultValue = "creationTime") String sortBy,
+                                                                          @RequestParam(defaultValue = "createdOn") String sortBy,
                                                                           @RequestParam(defaultValue = "ASC") Sort.Direction orderBy,
                                                                           @RequestParam(defaultValue = "20") int pageSize,
                                                                           @RequestParam(defaultValue = "0") int pageNo){
