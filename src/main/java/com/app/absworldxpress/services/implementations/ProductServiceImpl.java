@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
@@ -12,6 +12,7 @@ import com.app.absworldxpress.model.CategoryModel;
 import com.app.absworldxpress.model.ProductModel;
 import com.app.absworldxpress.repository.CategoryRepository;
 import com.app.absworldxpress.repository.ProductRepository;
+import com.app.absworldxpress.services.ProductService;
 import com.app.absworldxpress.util.ImageUtilService;
 import com.app.absworldxpress.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ import java.util.Optional;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 

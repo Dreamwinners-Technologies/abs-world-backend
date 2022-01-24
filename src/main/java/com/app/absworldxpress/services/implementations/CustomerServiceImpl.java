@@ -1,10 +1,11 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.dto.response.CustomerListResponse;
 import com.app.absworldxpress.jwt.model.User;
 import com.app.absworldxpress.jwt.repository.UserRepository;
 import com.app.absworldxpress.jwt.services.AuthService;
+import com.app.absworldxpress.services.CustomerService;
 import com.app.absworldxpress.util.UtilService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.*;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     private UserRepository userRepository;
     private AuthService authService;

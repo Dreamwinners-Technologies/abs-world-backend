@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
@@ -7,6 +7,7 @@ import com.app.absworldxpress.dto.response.UserProfileResponse;
 import com.app.absworldxpress.jwt.model.User;
 import com.app.absworldxpress.jwt.repository.UserRepository;
 import com.app.absworldxpress.jwt.security.jwt.JwtProvider;
+import com.app.absworldxpress.services.ProfileService;
 import com.app.absworldxpress.util.ImageUtilService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

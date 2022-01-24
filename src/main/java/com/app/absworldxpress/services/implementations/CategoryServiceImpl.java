@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
@@ -9,6 +9,7 @@ import com.app.absworldxpress.dto.response.CategoryResponse;
 import com.app.absworldxpress.jwt.services.AuthService;
 import com.app.absworldxpress.model.CategoryModel;
 import com.app.absworldxpress.repository.CategoryRepository;
+import com.app.absworldxpress.services.CategoryService;
 import com.app.absworldxpress.util.ImageUtilService;
 import com.app.absworldxpress.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;

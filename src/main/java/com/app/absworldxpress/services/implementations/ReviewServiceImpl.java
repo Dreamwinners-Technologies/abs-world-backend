@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.dto.BasicTableInfo;
@@ -9,6 +9,7 @@ import com.app.absworldxpress.model.ProductModel;
 import com.app.absworldxpress.model.ReviewModel;
 import com.app.absworldxpress.repository.ProductRepository;
 import com.app.absworldxpress.repository.ReviewRepository;
+import com.app.absworldxpress.services.ReviewService;
 import com.app.absworldxpress.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;

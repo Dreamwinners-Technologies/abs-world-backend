@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
@@ -8,6 +8,7 @@ import com.app.absworldxpress.jwt.security.jwt.JwtProvider;
 import com.app.absworldxpress.jwt.services.AuthService;
 import com.app.absworldxpress.model.SliderModel;
 import com.app.absworldxpress.repository.SliderRepository;
+import com.app.absworldxpress.services.SliderService;
 import com.app.absworldxpress.util.ImageUtilService;
 import com.app.absworldxpress.util.UtilService;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SliderServiceImpl implements SliderService{
+public class SliderServiceImpl implements SliderService {
 
     private final SliderRepository sliderRepository;
     private final JwtProvider jwtProvider;

@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
@@ -13,6 +13,7 @@ import com.app.absworldxpress.model.MessageModel;
 import com.app.absworldxpress.model.TicketModel;
 import com.app.absworldxpress.repository.MessageRepository;
 import com.app.absworldxpress.repository.TicketRepository;
+import com.app.absworldxpress.services.SupportService;
 import com.app.absworldxpress.util.UtilService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Service
-public class SupportServiceImpl implements SupportService{
+public class SupportServiceImpl implements SupportService {
 
     @Autowired
     MessageRepository messageRepository;

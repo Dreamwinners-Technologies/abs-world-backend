@@ -1,4 +1,4 @@
-package com.app.absworldxpress.services;
+package com.app.absworldxpress.services.implementations;
 
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.dto.BasicTableInfo;
@@ -15,6 +15,7 @@ import com.app.absworldxpress.model.ProductModel;
 import com.app.absworldxpress.repository.OrderProductRepository;
 import com.app.absworldxpress.repository.OrderRepository;
 import com.app.absworldxpress.repository.ProductRepository;
+import com.app.absworldxpress.services.OrderService;
 import com.app.absworldxpress.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
