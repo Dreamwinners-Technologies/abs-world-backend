@@ -25,6 +25,8 @@ public class SettingsModel {
     private String facebookPage;
     private String youtubeChannel;
     private String telegramLink;
+    private String whatsapp;
+    private String imo;
 
     private Boolean isUnderMaintenance;
     private String maintenanceMsg;

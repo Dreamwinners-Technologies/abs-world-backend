@@ -92,6 +92,8 @@ public class SettingsServiceImpl implements SettingsService {
                 settingsModel.setFacebookPage(settingsRequest.getFacebookPage());
                 settingsModel.setYoutubeChannel(settingsRequest.getYoutubeChannel());
                 settingsModel.setTelegramLink(settingsRequest.getTelegramLink());
+                settingsModel.setWhatsapp(settingsRequest.getWhatsapp());
+                settingsModel.setImo(settingsRequest.getImo());
                 settingsModel.setIsUnderMaintenance(settingsRequest.getIsUnderMaintenance());
                 settingsModel.setMaintenanceMsg(settingsRequest.getMaintenanceMsg());
                 settingsModel.setIsServerDown(settingsRequest.getIsServerDown());
