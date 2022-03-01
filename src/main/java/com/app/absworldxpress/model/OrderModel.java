@@ -27,6 +27,7 @@ public class OrderModel {
     private String orderStatus;
     private String paymentMethod;
     private String paymentStatus;
+    private String TransactionId;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     private List<OrderProductModel> productModelList;

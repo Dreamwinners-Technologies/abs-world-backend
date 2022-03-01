@@ -4,5 +4,5 @@ import com.app.absworldxpress.dto.ApiResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface PaymentService {
-    ResponseEntity<ApiResponse<String>> initialPayment(String token, String orderId);
+    ResponseEntity<ApiResponse<String>> initialPayment(String token, String orderId) throws Exception;
 }

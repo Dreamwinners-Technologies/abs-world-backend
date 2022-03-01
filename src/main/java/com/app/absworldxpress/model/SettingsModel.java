@@ -1,6 +1,5 @@
 package com.app.absworldxpress.model;
 
-import jdk.jfr.Description;
 import lombok.*;
 
 import javax.persistence.Entity;

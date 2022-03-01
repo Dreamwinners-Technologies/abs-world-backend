@@ -16,7 +16,7 @@ public class PaymentController {
 
     @PostMapping("/{orderId}")
     public ResponseEntity<ApiResponse<String>> initialPayment(@RequestHeader(name = "Authorization") String token,
-                                                              @PathVariable String orderId){
+                                                              @PathVariable String orderId) throws Exception{
         return paymentService.initialPayment(token,orderId);
     }
 }
