@@ -28,7 +28,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/ABSWorld}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:abs123456}
+    password: ${DB_PASSWORD:12345678}
   config:
     activate:
       on-profile:  pgsql
