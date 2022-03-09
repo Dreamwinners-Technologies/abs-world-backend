@@ -67,8 +67,8 @@ public class SSLCommerz {
         this.storeTestMode = storeTestMode;
 
         if (storeTestMode) {
-            this.storeId = "testbox";
-            this.storePass = "qwerty";
+            this.storeId = "absxp61d5d433355ef";
+            this.storePass = "absxp61d5d433355ef@ssl";
             this.sslczURL = "https://sandbox.sslcommerz.com/";
         }
 
@@ -172,7 +172,7 @@ public class SSLCommerz {
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
-    boolean orderValidate(String merchantTrnxnId, String merchantTrnxnAmount, String merchantTrnxnCurrency,
+    public boolean orderValidate(String merchantTrnxnId, String merchantTrnxnAmount, String merchantTrnxnCurrency,
                           Map<String, String> requestParameters) throws IOException, NoSuchAlgorithmException {
         boolean hash_verified = this.ipnHashVerify(requestParameters);
         if (hash_verified) {

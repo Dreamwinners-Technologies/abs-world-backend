@@ -9,15 +9,18 @@ import com.app.absworldxpress.jwt.model.User;
 import com.app.absworldxpress.jwt.repository.UserRepository;
 import com.app.absworldxpress.jwt.security.jwt.JwtProvider;
 import com.app.absworldxpress.jwt.services.AuthService;
+import com.app.absworldxpress.model.DeliveryAreaModel;
 import com.app.absworldxpress.model.OrderModel;
 import com.app.absworldxpress.model.OrderProductModel;
 import com.app.absworldxpress.model.ProductModel;
+import com.app.absworldxpress.repository.DeliveryAreaRepository;
 import com.app.absworldxpress.repository.OrderProductRepository;
 import com.app.absworldxpress.repository.OrderRepository;
 import com.app.absworldxpress.repository.ProductRepository;
 import com.app.absworldxpress.services.OrderService;
 import com.app.absworldxpress.util.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,11 +47,18 @@ public class OrderServiceImpl implements OrderService {
     ProductRepository productRepository;
     @Autowired
     OrderProductRepository orderProductRepository;
+    @Autowired
+    DeliveryAreaRepository deliveryAreaRepository;
 
     @Override
     public ResponseEntity<ApiResponse<OrderModel>> placeOrder(String token, PlaceOrderRequest placeOrderRequest) {
 
         Optional<User> optionalUser = userRepository.findByUsername(jwtProvider.getUserNameFromJwt(token));
+
+        Optional<DeliveryAreaModel> deliveryAreaModelOptional = deliveryAreaRepository.findById(placeOrderRequest.getDeliveryAreaId());
+        if (!deliveryAreaModelOptional.isPresent()){
+            return new ResponseEntity<>(new ApiResponse<OrderModel>(400,"Delivery Area Not Found",null), HttpStatus.BAD_REQUEST);
+        }
 
         if (optionalUser.isPresent()){
 
@@ -66,10 +76,12 @@ public class OrderServiceImpl implements OrderService {
                     .customerName(user.getFullName())
                     .customerPhoneNumber(placeOrderRequest.getCustomerPhoneNumber())
                     .deliveryAddress(placeOrderRequest.getDeliveryAddress())
+                    .deliveryAreaModel(deliveryAreaModelOptional.get())
                     .orderNote(placeOrderRequest.getOrderNote())
                     .paymentMethod(placeOrderRequest.getPaymentMethod())
                     .orderStatus("PENDING")
                     .paymentStatus("NOT PAID")
+                    .paidAmount(0)
                     .productModelList(orderProductModelList)
                     .orderAmount(orderAmount)
                     .createdBy(basicTableInfo.getCreateBy())
@@ -78,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
                     .updatedTime(basicTableInfo.getCreationTime())
                     .build();
             System.out.println("before save order model");
+
             if (orderModel.getProductModelList().isEmpty()){
                 return new ResponseEntity<>(new ApiResponse<OrderModel>(400,"Order Failed! Stock Unavailable.",null), HttpStatus.BAD_REQUEST);
             }

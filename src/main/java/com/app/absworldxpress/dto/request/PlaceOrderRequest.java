@@ -12,6 +12,7 @@ import java.util.List;
 public class PlaceOrderRequest {
     private String customerPhoneNumber;
     private String deliveryAddress;
+    private String deliveryAreaId;
     private String orderNote;
     private String paymentMethod;
 
