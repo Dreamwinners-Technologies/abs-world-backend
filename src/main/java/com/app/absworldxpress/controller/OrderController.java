@@ -1,5 +1,6 @@
 package com.app.absworldxpress.controller;
 
+import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.dto.request.PlaceOrderRequest;
 import com.app.absworldxpress.dto.response.OrderListResponse;
@@ -24,6 +25,12 @@ public class OrderController {
     public ResponseEntity<ApiResponse<OrderModel>> placeOrder(@RequestHeader(name = "Authorization") String token,
                                                               @RequestBody PlaceOrderRequest placeOrderRequest){
         return orderService.placeOrder(token,placeOrderRequest);
+    }
+
+    @PutMapping ("/cancel/{orderId}")
+    public ResponseEntity<ApiMessageResponse> cancelOrder(@RequestHeader(name = "Authorization") String token,
+                                                               @PathVariable String orderId){
+        return orderService.cancelOrder(token,orderId);
     }
 
     @GetMapping

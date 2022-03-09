@@ -1,5 +1,6 @@
 package com.app.absworldxpress.services.implementations;
 
+import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.dto.BasicTableInfo;
 import com.app.absworldxpress.dto.request.OrderProductModelRequest;
@@ -134,6 +135,31 @@ public class OrderServiceImpl implements OrderService {
             return new ResponseEntity<>(new ApiResponse<>(200,"Order Found",orderListResponse),HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<ApiMessageResponse> cancelOrder(String token, String orderId) {
+        Optional<OrderModel> orderModelOptional = orderRepository.findById(orderId);
+        if (orderModelOptional.isPresent()){
+            OrderModel orderModel = orderModelOptional.get();
+            if (authService.isThisUser("ADMIN",token) || jwtProvider.getUserNameFromJwt(token).equals(orderModel.getCreatedBy())){
+                if (orderModel.getPaymentStatus().equals("NOT PAID")){
+                    orderModel.setOrderStatus("CANCELED");
+                    orderModel.setUpdatedBy(jwtProvider.getUserNameFromJwt(token));
+
+                    orderRepository.save(orderModel);
+                    return new ResponseEntity<>(new ApiMessageResponse(200, "Order canceled Successfully!"),HttpStatus.OK);
+                }
+                else {
+                    return new ResponseEntity<>(new ApiMessageResponse(400, "This Order is already Paid!"),HttpStatus.BAD_REQUEST);
+                }
+            }
+            else {
+                return new ResponseEntity<>(new ApiMessageResponse(401, "You Have no permission to cancel this order!"),HttpStatus.UNAUTHORIZED);
+            }
+        }
+        else {
+            return new ResponseEntity<>(new ApiMessageResponse(404, "Order Not found!"),HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 //    for place order - required data & methods
