@@ -20,8 +20,9 @@ public class DeliveryAreaController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<DeliveryAreaModel>>> getDeliveryArea(@RequestParam(required = false) String deliveryAreaName,
-                                                                                @RequestParam(required = false) String district){
-        return deliveryAreaService.getDeliveryArea(deliveryAreaName,district);
+                                                                                @RequestParam(required = false) String district,
+                                                                                @RequestParam(required = false) String country){
+        return deliveryAreaService.getDeliveryArea(deliveryAreaName,district, country);
     }
     @PostMapping
     public ResponseEntity<ApiMessageResponse> addDeliveryArea(@RequestHeader(name = "Authorization") String token,

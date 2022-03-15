@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-
 @Service
 @AllArgsConstructor
 public class DeliveryAreaServiceImpl implements DeliveryAreaService {
@@ -29,17 +27,20 @@ public class DeliveryAreaServiceImpl implements DeliveryAreaService {
     private UtilService utilService;
 
     @Override
-    public ResponseEntity<ApiResponse<List<DeliveryAreaModel>>> getDeliveryArea(String deliveryAreaName, String district) {
+    public ResponseEntity<ApiResponse<List<DeliveryAreaModel>>> getDeliveryArea(String deliveryAreaName, String district, String country) {
         DeliveryAreaModel deliveryAreaModel = DeliveryAreaModel.builder()
                 .deliveryAreaName(deliveryAreaName)
                 .district(district)
+                .country(country)
                 .build();
         Sort sort = Sort.by("deliveryAreaName");
 
         ExampleMatcher matcher = ExampleMatcher
                 .matchingAll()
-                .withMatcher("deliveryAreaName", contains().ignoreCase())
-                .withMatcher("district", contains().ignoreCase());
+                .withMatcher("deliveryAreaName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("district", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("country", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
 
         List<DeliveryAreaModel> deliveryAreaModelList = deliveryAreaRepository.findAll(Example.of(deliveryAreaModel,matcher),sort);
 
@@ -57,6 +58,7 @@ public class DeliveryAreaServiceImpl implements DeliveryAreaService {
             deliveryAreaModel.setDeliveryAreaId(basicTableInfo.getId());
             deliveryAreaModel.setDeliveryAreaName(addDeliveryAreaRequest.getDeliveryAreaName());
             deliveryAreaModel.setCountry(addDeliveryAreaRequest.getCountry());
+            deliveryAreaModel.setDistrict(addDeliveryAreaRequest.getDistrict());
             deliveryAreaModel.setDivision(addDeliveryAreaRequest.getDivision());
             deliveryAreaModel.setDeliveryCharge(addDeliveryAreaRequest.getDeliveryCharge());
 

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface DeliveryAreaService {
-    ResponseEntity<ApiResponse<List<DeliveryAreaModel>>> getDeliveryArea(String deliveryAreaName, String district);
+    ResponseEntity<ApiResponse<List<DeliveryAreaModel>>> getDeliveryArea(String deliveryAreaName, String district, String country);
 
     ResponseEntity<ApiMessageResponse> addDeliveryArea(String token, AddDeliveryAreaRequest addDeliveryAreaRequest);
 
