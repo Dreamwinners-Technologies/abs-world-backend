@@ -51,7 +51,7 @@ public class User {
     private String password;
 
     @JsonIgnore
-    int generatedOTP=1234;
+    int generatedOTP;
 
     @JsonIgnore
     boolean passwordReset;

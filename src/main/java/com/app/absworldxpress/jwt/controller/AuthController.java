@@ -1,11 +1,13 @@
 package com.app.absworldxpress.jwt.controller;
 
+import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.jwt.dto.request.LoginForm;
 import com.app.absworldxpress.jwt.dto.request.SignUpForm;
 import com.app.absworldxpress.jwt.dto.request.JoiningForm;
 import com.app.absworldxpress.jwt.dto.response.LoggedUserDetailsResponse;
 import com.app.absworldxpress.jwt.model.User;
+import com.app.absworldxpress.jwt.services.ForgetPasswordService;
 import com.app.absworldxpress.jwt.services.SignUpAndSignInService;
 import javassist.bytecode.DuplicateMemberException;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.List;
 public class AuthController {
 
     private SignUpAndSignInService signUpAndSignInService;
+    private ForgetPasswordService forgetPasswordService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -43,11 +46,16 @@ public class AuthController {
         return signUpAndSignInService.ecommerceSignup(signUpRequest);
     }
 
-//    @GetMapping("/users")
-//    public ResponseEntity<UserResponse> getLoggedAuthId() {
-//        return signUpAndSignInService.getLoggedAuthUser();
-//    }
-//
+    @PutMapping("/generateOTP")
+    public ResponseEntity<ApiMessageResponse> generateOTP(@RequestParam String email){
+        return forgetPasswordService.generateOTP(email);
+    }
+
+    @PutMapping("/changePassword")
+    public ResponseEntity<ApiMessageResponse> changePassword(@RequestParam Integer otp, @RequestParam String email,
+                                                          @RequestParam String newPassword){
+        return forgetPasswordService.changePassword(otp,email,newPassword);
+    }
 
     @GetMapping("/serverCheck")
     public String getServerStatStatus() {
