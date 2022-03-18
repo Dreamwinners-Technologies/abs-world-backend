@@ -1,9 +1,11 @@
 package com.app.absworldxpress.controller;
 
+import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.dto.ApiResponse;
 import com.app.absworldxpress.model.PaymentInfoModel;
 import com.app.absworldxpress.services.PaymentService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,21 @@ public class PaymentController {
     public ResponseEntity<ApiResponse<String>> initialPayment(@RequestHeader(name = "Authorization") String token,
                                                               @PathVariable String orderId) throws Exception{
         return paymentService.initialPayment(token,orderId);
+    }
+
+    @GetMapping("/success")
+    public ResponseEntity<ApiMessageResponse> paymentSuccess(){
+        return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Successful!"), HttpStatus.OK);
+    }
+
+    @GetMapping("/fail")
+    public ResponseEntity<ApiMessageResponse> paymentFailed(){
+        return new ResponseEntity<>(new ApiMessageResponse(400,"Payment Failed!"), HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/cancel")
+    public ResponseEntity<ApiMessageResponse> paymentCanceled(){
+        return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Canceled!"), HttpStatus.OK);
     }
 
     @PostMapping("/ipnListener")

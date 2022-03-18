@@ -65,9 +65,9 @@ public class PaymentServiceImpl implements PaymentService {
             postData.put("currency", "BDT");
             postData.put("tran_id", trxId);
             postData.put("product_category", "Fashion");
-            postData.put("success_url", "https://www.facebook.com/absworldxpress");
-            postData.put("fail_url", "https://ihsonnet.netlify.com");
-            postData.put("cancel_url", "https://dokanee.com");
+            postData.put("success_url", "https://abs-world-xpress.herokuapp.com/api/payment/success");
+            postData.put("fail_url", "https://abs-world-xpress.herokuapp.com/api/payment/fail");
+            postData.put("cancel_url", "https://abs-world-xpress.herokuapp.com/api/payment/cancel");
             postData.put("emi_option", "0");
             postData.put("cus_name", orderModel.getCustomerName());
             postData.put("cus_email", email);
