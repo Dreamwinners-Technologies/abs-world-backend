@@ -34,7 +34,7 @@ public class SSLCommerz {
     private String error;
 
     private String sslczURL = "https://securepay.sslcommerz.com/";
-    private String submitURL = "gwprocess/v3/api.php";
+    private String submitURL = "gwprocess/v4/api.php";
     private String validationURL = "validator/api/validationserverAPI.php";
     private String checkingURL = "validator/api/merchantTransIDvalidationAPI.php";
 
