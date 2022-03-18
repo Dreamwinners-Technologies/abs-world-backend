@@ -65,9 +65,9 @@ public class PaymentServiceImpl implements PaymentService {
             postData.put("currency", "BDT");
             postData.put("tran_id", trxId);
             postData.put("product_category", "Fashion");
-            postData.put("success_url", "https://payment-abs.netlify.app/success.html");
-            postData.put("fail_url", "https://payment-abs.netlify.app/fail.html");
-            postData.put("cancel_url", "https://payment-abs.netlify.app/cancel.html");
+            postData.put("success_url", "https://payment-abs.netlify.app");
+            postData.put("fail_url", "https://payment-abs.netlify.app");
+            postData.put("cancel_url", "https://payment-abs.netlify.app");
             postData.put("emi_option", "0");
             postData.put("cus_name", orderModel.getCustomerName());
             postData.put("cus_email", email);
