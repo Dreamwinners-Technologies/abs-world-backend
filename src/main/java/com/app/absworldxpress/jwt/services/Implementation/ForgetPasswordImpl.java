@@ -4,6 +4,7 @@ import com.app.absworldxpress.dto.ApiMessageResponse;
 import com.app.absworldxpress.jwt.model.User;
 import com.app.absworldxpress.jwt.repository.UserRepository;
 import com.app.absworldxpress.jwt.services.ForgetPasswordService;
+import com.app.absworldxpress.util.EmailSenderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class ForgetPasswordImpl implements ForgetPasswordService {
 
     private UserRepository userRepository;
     private PasswordEncoder encoder;
+    private EmailSenderService emailSenderService;
     @Override
     public ResponseEntity<ApiMessageResponse> changePassword(Integer otp, String email, String newPassword) {
         Optional<User> userOptional = userRepository.findByEmail(email);
@@ -51,7 +53,10 @@ public class ForgetPasswordImpl implements ForgetPasswordService {
             user.setGeneratedOTP(otp);
 
             userRepository.save(user);
-            return new ResponseEntity<>(new ApiMessageResponse(200,"OTP Generated : "+String.valueOf(otp)), HttpStatus.OK);
+
+            emailSenderService.sendEmail(email,"Dear "+user.getFullName()+", Your OTP is "+String.valueOf(otp),"OTP From ABS World Express");
+
+            return new ResponseEntity<>(new ApiMessageResponse(200,"OTP Generated : "), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(new ApiMessageResponse(404, "User Not Exist"), HttpStatus.NOT_FOUND);
