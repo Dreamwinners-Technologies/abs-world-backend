@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -26,15 +27,17 @@ public class PaymentController {
     }
 
     @PostMapping("/success/{object}")
-    public ResponseEntity<ApiMessageResponse> paymentSuccess(@PathVariable(required = false) String object){
+    public ResponseEntity<Void> paymentSuccess(@PathVariable(required = false) String object){
         System.out.println(object);
-        return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Successful!"), HttpStatus.OK);
+//      return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Successful!"), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://fullstackdeveloper.guru")).build();
     }
 
     @PostMapping("/fail/{object}")
-    public ResponseEntity<ApiMessageResponse> paymentFailed(@PathVariable(required = false) String object){
+    public ResponseEntity<Void> paymentFailed(@PathVariable(required = false) String object){
         System.out.println(object);
-        return new ResponseEntity<>(new ApiMessageResponse(400,"Payment Failed!"), HttpStatus.BAD_REQUEST);
+//        return new ResponseEntity<>(new ApiMessageResponse(400,"Payment Failed!"), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://fullstackdeveloper.guru")).build();
     }
 
     @PostMapping("/cancel/{object}")
