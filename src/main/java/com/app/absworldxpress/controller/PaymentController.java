@@ -26,17 +26,17 @@ public class PaymentController {
     }
 
     @PostMapping("/success/{object}")
-    public ResponseEntity<ApiMessageResponse> paymentSuccess(@PathVariable Object object){
+    public ResponseEntity<ApiMessageResponse> paymentSuccess(@PathVariable(required = false) Object object){
         return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Successful!"), HttpStatus.OK);
     }
 
     @PostMapping("/fail/{object}")
-    public ResponseEntity<ApiMessageResponse> paymentFailed(@PathVariable Object object){
+    public ResponseEntity<ApiMessageResponse> paymentFailed(@PathVariable(required = false) Object object){
         return new ResponseEntity<>(new ApiMessageResponse(400,"Payment Failed!"), HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/cancel/{object}")
-    public ResponseEntity<ApiMessageResponse> paymentCanceled(@PathVariable Object object){
+    public ResponseEntity<ApiMessageResponse> paymentCanceled(@PathVariable(required = false) Object object){
         return new ResponseEntity<>(new ApiMessageResponse(200,"Payment Canceled!"), HttpStatus.OK);
     }
 
